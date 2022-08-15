@@ -1,7 +1,7 @@
 ---
 title: "Introduction to R Programming"
-author: "Sana Rasheed"
-date: "May 14, 2020"
+author: "Hira Arif"
+date: "August 15, 2022"
 output: html_document
 ---
 
@@ -23,22 +23,27 @@ output: html_document
 
 
 ```{r }
-#### Start solution ####
+first_name <- c('H','i','r','A')
+first_name
+```
+
+```{r }
+name <- c(first_name,"Arif")
 ```
 
 
 ```{r }
-
+numbers <- 100:120
 ```
 
 
 ```{r }
-
-```
-
-
-```{r }
-
+sequence = c(2*(1:9))
+m <- matrix(sequence, nrow = 3, ncol = 3)
+m
+row.names(m) <- c("r1","r2","r3")
+colnames(m) <- c("c1","c2","c3")
+m
 ```
 
 
@@ -59,22 +64,22 @@ output: html_document
 
 
 ```{r }
-#### Start solution ####
+employee <- factor(c("Employed", "Self-Employed", "Employed", "Unemployed", "Self-Employed", "Employed", "Self-Employed", "Unemployed"), levels = c("Employed", "Unemployed", "Self-Employed"))
 ```
 
 
 ```{r }
-
+employee
 ```
 
 
 ```{r }
-
+table(employee)
 ```
 
 
 ```{r }
-
+unclass(employee)
 ```
 
 
@@ -101,27 +106,69 @@ output: html_document
 
 
 ```{r }
-
+bank_customers <- data.frame(matrix(ncol = 3))
+colnames(bank_customers) <- c("CustomerID", "hasAccount", "totalBalance")
+bank_customers <- bank_customers[-c(1),]
+bank_customers
 ```
 
 
 ```{r }
+new_customer <- data.frame(
+    row.names = "Alia",
+    CustomerID = 1,
+    hasAccount = F,
+    totalBalance = NaN
+)
+bank_customers <- rbind(bank_customers, new_customer)
 
+new_customer <- data.frame(
+    row.names = "Nancy",
+    CustomerID = 2,
+    hasAccount = T,
+    totalBalance = 10000
+)
+bank_customers <- rbind(bank_customers, new_customer)
+
+new_customer <- data.frame(
+    row.names = "Fernando",
+    CustomerID = 3,
+    hasAccount = T,
+    totalBalance = 0
+)
+bank_customers <- rbind(bank_customers, new_customer)
+
+new_customer <- data.frame(
+    row.names = "Louis",
+    CustomerID = 4,
+    hasAccount = T,
+    totalBalance = 2000
+)
+bank_customers <- rbind(bank_customers, new_customer)
+
+new_customer <- data.frame(
+    row.names = "Diane",
+    CustomerID = 5,
+    hasAccount = F,
+    totalBalance = NaN
+)
+bank_customers <- rbind(bank_customers, new_customer)
+bank_customers
 ```
 
 
 ```{r }
-
+nrow(bank_customers)
 ```
 
 
 ```{r }
-
+ncol(bank_customers)
 ```
 
 
 ```{r }
-#### End solution ####
+row.names(bank_customers)
 ```
 
 ### Good Job! You have successfully completed the section!
