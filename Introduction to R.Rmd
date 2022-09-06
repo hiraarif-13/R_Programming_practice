@@ -24,31 +24,32 @@ output: html_document
 
 ```{r }
 first_name <- c('H','i','r','A')
-first_name
+print(first_name)
 ```
 
 ```{r }
-name <- c(first_name,"Arif")
+name <- paste(first_name, collapse = '')
+print(name)
 ```
 
 
 ```{r }
 numbers <- 100:120
+print(numbers)
 ```
 
 
 ```{r }
 sequence = c(2*(1:9))
 m <- matrix(sequence, nrow = 3, ncol = 3)
-m
-row.names(m) <- c("r1","r2","r3")
-colnames(m) <- c("c1","c2","c3")
-m
+print(m)
 ```
 
 
 ```{r }
-
+row.names(m) <- c("r1","r2","r3")
+colnames(m) <- c("c1","c2","c3")
+print(m)
 ```
 
 
@@ -69,7 +70,7 @@ employee <- factor(c("Employed", "Self-Employed", "Employed", "Unemployed", "Sel
 
 
 ```{r }
-employee
+print(employee)
 ```
 
 
@@ -114,11 +115,12 @@ bank_customers
 
 
 ```{r }
+#adding records
 new_customer <- data.frame(
     row.names = "Alia",
     CustomerID = 1,
     hasAccount = F,
-    totalBalance = NaN
+    totalBalance = NA
 )
 bank_customers <- rbind(bank_customers, new_customer)
 
@@ -149,8 +151,8 @@ bank_customers <- rbind(bank_customers, new_customer)
 new_customer <- data.frame(
     row.names = "Diane",
     CustomerID = 5,
-    hasAccount = F,
-    totalBalance = NaN
+    hasAccount = NA,
+    totalBalance = NA
 )
 bank_customers <- rbind(bank_customers, new_customer)
 bank_customers
@@ -168,7 +170,7 @@ ncol(bank_customers)
 
 
 ```{r }
-row.names(bank_customers)
+dimnames(bank_customers)
 ```
 
 ### Good Job! You have successfully completed the section!
@@ -190,7 +192,10 @@ row.names(bank_customers)
 
 
 ```{r }
-
+nums = 1:100
+for(i in nums){
+     next
+}
 ```
 
 
