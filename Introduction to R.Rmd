@@ -2,25 +2,27 @@
 title: "Introduction to R Programming"
 author: "Hira Arif"
 date: "August 15, 2022"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
+##### NOTE:
 
-##### NOTE: 
-1. Change author name and date to your exercise submission date in above section
-2. Your code MUST execute without any errors. 
-3. You can add more lines in your code as required.
+1.  Change author name and date to your exercise submission date in above section
+2.  Your code MUST execute without any errors.
+3.  You can add more lines in your code as required.
 
 ## Section 1: Data Types and Operations Pt. 1
 
-### Question 1 
-**Create the variables with the following composition:**  
-1. A vector containing each letter of your first name as its elements.  
-2. A variable that contains your name concatenated from the vector created in (1)  
-3. A variable containing a sequence from 100 to 120.  
-4. Create a matrix of 3x3 dimensions that contains the even sequence of numbers starting from 2.  
-5. Assign names to the variables.  
+### Question 1
 
+**Create the variables with the following composition:**\
+1. A vector containing each letter of your first name as its elements.\
+2. A variable that contains your name concatenated from the vector created in (1)\
+3. A variable containing a sequence from 100 to 120.\
+4. Create a matrix of 3x3 dimensions that contains the even sequence of numbers starting from 2.\
+5. Assign names to the variables.
 
 ```{r }
 first_name <- c('H','i','r','A')
@@ -32,12 +34,10 @@ name <- paste(first_name, collapse = '')
 print(name)
 ```
 
-
 ```{r }
 numbers <- 100:120
 print(numbers)
 ```
-
 
 ```{r }
 sequence = c(2*(1:9))
@@ -45,66 +45,59 @@ m <- matrix(sequence, nrow = 3, ncol = 3)
 print(m)
 ```
 
-
 ```{r }
 row.names(m) <- c("r1","r2","r3")
 colnames(m) <- c("c1","c2","c3")
 print(m)
 ```
 
-
 ```{r }
 #### End solution ####
 ```
 
 ### Question 2
-**Create a factor variable emp_status:**  
-1. Containing the categorical variables: Employed, Unemployed, Self-Employed, with each level appearing atleast more than 2.  
-2. Display the levels and the factor variable as a table.  
-3. Unclass the elements of the factor variable.  
 
+**Create a factor variable emp_status:**\
+1. Containing the categorical variables: Employed, Unemployed, Self-Employed, with each level appearing atleast more than 2.\
+2. Display the levels and the factor variable as a table.\
+3. Unclass the elements of the factor variable.
 
 ```{r }
 employee <- factor(c("Employed", "Self-Employed", "Employed", "Unemployed", "Self-Employed", "Employed", "Self-Employed", "Unemployed"), levels = c("Employed", "Unemployed", "Self-Employed"))
 ```
 
-
 ```{r }
 print(employee)
 ```
-
 
 ```{r }
 table(employee)
 ```
 
-
 ```{r }
 unclass(employee)
 ```
-
 
 ```{r }
 #### End solution ####
 ```
 
 ### Question 3
-**Create a dataframe object called bank_customers:**  
-1. the data frame will have three columns: CustomerID, hasAccount, totalBalance  
-2. Fill the data as follows  
-    a. Alicia does not have an account. She is here for inquiry   
-    b. Nancy is here to check on her account balance of USD 10,000.  
-    c. Fernando is here to deposit USD 100 in his account which had no balance.  
-    d. Louis will withdraw all his money from the account that had USD 2,000.   
-    e. Diane is here for information.   
-3. For customers that do not have a value, use NA as placeholder.  
-4. Print the number of rows, columns and names for the data frame.  
 
+**Create a dataframe object called bank_customers:**\
+1. the data frame will have three columns: CustomerID, hasAccount, totalBalance\
+2. Fill the data as follows\
+a. Alicia does not have an account. She is here for inquiry\
+b. Nancy is here to check on her account balance of USD 10,000.\
+c. Fernando is here to deposit USD 100 in his account which had no balance.\
+d. Louis will withdraw all his money from the account that had USD 2,000.\
+e. Diane is here for information.\
+3. For customers that do not have a value, use NA as placeholder.\
+4. Print the number of rows, columns and names for the data frame.
 
 ```{r }
 #### Start solution ####
 ```
-
 
 ```{r }
 bank_customers <- data.frame(matrix(ncol = 3))
@@ -112,7 +105,6 @@ colnames(bank_customers) <- c("CustomerID", "hasAccount", "totalBalance")
 bank_customers <- bank_customers[-c(1),]
 bank_customers
 ```
-
 
 ```{r }
 #adding records
@@ -158,16 +150,13 @@ bank_customers <- rbind(bank_customers, new_customer)
 bank_customers
 ```
 
-
 ```{r }
 nrow(bank_customers)
 ```
 
-
 ```{r }
 ncol(bank_customers)
 ```
-
 
 ```{r }
 dimnames(bank_customers)
@@ -175,88 +164,98 @@ dimnames(bank_customers)
 
 ### Good Job! You have successfully completed the section!
 
-## Section 2: Control Structures 
+## Section 2: Control Structures
 
 ### Question 1
-**Create a variable containing a sequence of numbers from 1 to 100:**  
-1. Iterate over the variables and print those numbers which are prime.  
 
-**Create a variable var with a value of 1:**  
-1. Create a while loop and increase the value of var at each iteration.   
-2. When you reach the 10th prime number, terminate the loop and print the number.  
+**Create a variable containing a sequence of numbers from 1 to 100:**\
+1. Iterate over the variables and print those numbers which are prime.
 
+**Create a variable var with a value of 1:**\
+1. Create a while loop and increase the value of var at each iteration.\
+2. When you reach the 10th prime number, terminate the loop and print the number.
 
 ```{r }
 #### Start solution ####
 ```
 
+```{r }
+### Question 1 (a)
+```
 
 ```{r }
-nums = 1:100
-for(i in nums){
-     next
+printPrimeNumbers <- function(nums){
+     primeNumbers = c()
+     for(num in nums){
+          flag <- 1; i <- 2
+          while(i < num){
+               if(num %% i == 0) flag <- 0
+               i = i + 1
+          }
+          if(flag == 1) primeNumbers = c(primeNumbers, num)
+     }
+     primeNumbers
 }
+nums = 1:100
+primeNumbers = printPrimeNumbers(nums)
+cat('Prime numbers are : ',primeNumbers)
 ```
 
+```{r }
+### Question 1 (b)
+```
 
 ```{r }
 
+getPrimeNumber <- function(nums,target){
+     index <- 1; primeCount <- 0; primeNumber <- NA
+     while(TRUE){
+          flag <- 1; i <- 2
+          while(i < nums[index]){
+               if(nums[index] %% i == 0) flag <- 0
+               i = i + 1
+          }
+          if(flag == 1){
+               primeNumber <- nums[index]
+               primeCount <- primeCount + 1
+          }
+          index <- index + 1
+          if(primeCount == target) break
+     }
+     primeNumber
+}
+nums <- 1:100
+p = getPrimeNumber(nums,10)
+print(p)
 ```
-
-
-```{r }
-
-```
-
-
-```{r }
-
-```
-
-
-```{r }
-
-```
-
 
 ```{r }
 #### End solution ####
 ```
 
 ### Question 2
-**Create a matrix of size 3x3 called mat_1:**  
-1. Iterate over all the values one by one and print the element as well as the position in the matrix (row, col)
 
+**Create a matrix of size 3x3 called mat_1:**\
+1. Iterate over all the values one by one and print the element as well as the position in the matrix (row, col)
 
 ```{r }
 #### Start solution ####
 ```
 
-
 ```{r }
 
-```
+# Creating matrix
+mat_1 = matrix(1:9, ncol = 3, nrow = 3)
 
+print(mat_1)
 
-```{r }
-
-```
-
-
-```{r }
-
-```
-
-
-```{r }
+for(row in seq_len(nrow(mat_1))){
+     for(column in seq_len(ncol(mat_1))){
+          print(mat_1[row,column])
+     }
+}
 
 ```
-
-
-```{r }
-
-```
-
 
 ```{r }
 #### End solution ####
@@ -267,83 +266,55 @@ for(i in nums){
 ## Section 3: Functions
 
 ### Question 1
-**Create a function called gcd that finds the greatest common divisor of two numbers a and b:**  
-1. a and b, should be taken as input.  
-2. The function must print the GCD as well as return it.  
-3. The output must be saved in a variable called answer.  
 
+**Create a function called gcd that finds the greatest common divisor of two numbers a and b:**\
+1. a and b, should be taken as input.\
+2. The function must print the GCD as well as return it.\
+3. The output must be saved in a variable called answer.
 
 ```{r }
 #### Start solution ####
 ```
 
-
 ```{r }
+gcd <- function(a,b){
+     if(b==0) a
+     else gcd(b, a%%b)
+}
 
+a <- 22
+b <- 33
+
+answer = gcd(a,b)
+
+cat('GCD of',a,'and',b,'is',answer)
 ```
-
-
-```{r }
-
-```
-
-
-```{r }
-
-```
-
-
-```{r }
-
-```
-
-
-```{r }
-
-```
-
 
 ```{r }
 #### End solution ####
 ```
 
 ### Question 2
-**Create a function called allConditionsMeet, that checks whether two expressions evaluate to true:**  
-1. a and b, should be taken as input.  
-2. the function should check if a and b, both conditions, evaluate to True.  
-3. The function must returns a boolean value.  
-4. Using a method, print the arguments that function takes.  
 
+**Create a function called allConditionsMeet, that checks whether two expressions evaluate to true:**\
+1. a and b, should be taken as input.\
+2. the function should check if a and b, both conditions, evaluate to True.\
+3. The function must returns a boolean value.\
+4. Using a method, print the arguments that function takes.
 
 ```{r }
 #### Start solution ####
 ```
 
-
 ```{r }
+allConditionsMeet <- function(a,b) if(a == TRUE && b == TRUE) TRUE else FALSE
 
+print(allConditionsMeet(2>3,4>6))
+
+arguments = names(formals(allConditionsMeet))
+
+cat('Arguments the function takes are',arguments)
 ```
-
-
-```{r }
-
-```
-
-
-```{r }
-
-```
-
-
-```{r }
-
-```
-
-
-```{r }
-
-```
-
 
 ```{r }
 #### End solution ####
@@ -354,127 +325,122 @@ for(i in nums){
 ## Section 4: Vectorized Operations
 
 ### Question 1
-**Create two matrices matrix_1 and matrix_2 of dimensions 2x3 and 3x2:**  
-1. Perform element-wise multiplication.  
-2. Perform matrix multipilcation.   
 
-**Create a 2x2 matrix my_mat:**  
-1. Write a function to find the determinant of the matrix.  
+**Create two matrices matrix_1 and matrix_2 of dimensions 2x3 and 3x2:**\
+1. Perform element-wise multiplication.\
+2. Perform matrix multipilcation.
 
+**Create a 2x2 matrix my_mat:**\
+1. Write a function to find the determinant of the matrix.
 
 ```{r }
 #### Start solution ####
 ```
 
-
 ```{r }
+matrix_1 = matrix(1:6, ncol = 3, nrow = 2)
 
+print(matrix_1)
 ```
 
-
 ```{r }
+matrix_2 = matrix(1:6, ncol = 2, nrow = 3)
 
+print(matrix_2)
 ```
 
-
 ```{r }
+print('Element-wise multipilcation')
 
+elements = c(matrix_2) * c(matrix_1)
+
+matrix_3 = matrix(elements,2,3)
+
+print(matrix_3)
 ```
 
-
 ```{r }
+print('Matrix multipilcation')
 
+matrix_3 = matrix_1%*%matrix_2
+
+print(matrix_3)
 ```
+```{r}
+my_mat = matrix(1:4, ncol = 2, nrow = 2)
 
-
-```{r }
-
+print(det(my_mat))
 ```
-
-
 ```{r }
 #### End solution ####
 ```
+
 
 ### Good Job! You have successfully completed the section!
 
 ## Section 5: Date and Time in R
 
 ### Question 1
-**Use the current date and time and store them into variables curr_date and curr_time respectively: [use sys]**  
-1. Convert both into date and time objects using the appropriate functions.  
-2. Print the weekday, year, second and hour using the appropriate function and variables.  
 
+**Use the current date and time and store them into variables curr_date and curr_time respectively: [use sys]**\
+1. Convert both into date and time objects using the appropriate functions.\
+2. Print the weekday, year, second and hour using the appropriate function and variables.
 
 ```{r }
 #### Start solution ####
 ```
 
-
 ```{r }
-
+curr_time = Sys.time()
 ```
 
-
 ```{r }
-
+curr_date = Sys.Date()
 ```
 
-
 ```{r }
-
+date = as.Date(curr_date)
 ```
 
-
 ```{r }
-
+time = as.POSIXlt(curr_time)
 ```
 
-
 ```{r }
+cat('weekday : ',time$wday)
 
+cat('\nyear : ',time$year)
+
+cat('\nsecond : ',time$sec)
+
+cat('\nhour : ',time$hour)
 ```
-
 
 ```{r }
 #### End solution ####
 ```
 
 ### Question 2
-**Create a variable to store current date/time**  
-1. Create another variable that stores and set the timezone as GMT-5  
-2. Find the difference between your current time and the GMT-5 timezone.  
 
+**Create a variable to store current date/time**\
+1. Create another variable that stores and set the timezone as GMT-5\
+2. Find the difference between your current time and the GMT-5 timezone.
 
 ```{r }
 #### Start solution ####
 ```
 
-
 ```{r }
+currentTime = as.POSIXlt(Sys.time(), tz='')
 
+print(currentTime)
 ```
 
-
 ```{r }
+gmtTime = as.POSIXlt(Sys.time(), tz = 'GMT')
 
+print(gmtTime)
 ```
-
-
-```{r }
-
-```
-
-
-```{r }
-
-```
-
-
-```{r }
-
-```
-
 
 ```{r }
 #### End solution ####
@@ -485,80 +451,80 @@ for(i in nums){
 ## Section 6: Loop Functions
 
 ### Question 1
-**Create a function to calculate mean and standard deviation of the provided data**
-1. Create a sequence of numbers from 100 to 150 store in a variable called numbers.
-1. Use lapply, sapply, apply and tapply to implement the functions on "numbers" [only on the second half of the sequence for tapply]
 
+**Create a function to calculate mean and standard deviation of the provided data** 1. Create a sequence of numbers from 100 to 150 store in a variable called numbers. 1. Use lapply, sapply, apply and tapply to implement the functions on "numbers" [only on the second half of the sequence for tapply]
 
 ```{r }
 #### Start solution ####
 ```
 
-
 ```{r }
+numbers = seq(100,150)
 
+numbers
 ```
 
-
-```{r }
-
+```{r}
+getMSD <- function(data) c(mean = mean(data), sd = sd(data))
 ```
 
-
 ```{r }
+msd <- lapply(X = list(numbers), FUN = getMSD)
 
+print(msd)
 ```
 
-
 ```{r }
+msd <- sapply(X = list(numbers), FUN = getMSD, simplify = 'array')
 
+print(msd)
 ```
 
-
 ```{r }
-
+msd <- apply(X = matrix(numbers, nrow = 1),
+             MARGIN = 1, FUN = getMSD, simplify = TRUE)
+print(msd)
 ```
 
+```{r }
+f <- gl(5,5)
+
+msd <- tapply(X = numbers[26:50], INDEX = f, FUN = getMSD)
+
+print(msd)
+```
 
 ```{r }
 #### End solution ####
 ```
 
 ### Question 2
-**Create a matrix of dimensions 4x4**
-1. Find the row-wise and column-wise mean of the matrix.
-2. Print the values.
 
+**Create a matrix of dimensions 4x4** 1. Find the row-wise and column-wise mean of the matrix. 2. Print the values.
 
 ```{r }
 #### Start solution ####
 ```
 
-
 ```{r }
-
+mat <- matrix(data = 1:16, ncol = 4, nrow = 4)
 ```
 
-
 ```{r }
-
+rowWiseMean <- rowMeans(mat)
 ```
 
-
 ```{r }
-
+colWiseMean <- colMeans(mat)
 ```
 
-
 ```{r }
-
+print(rowWiseMean)
 ```
 
-
 ```{r }
-
+print(colWiseMean)
 ```
-
 
 ```{r }
 #### End solution ####
@@ -569,58 +535,38 @@ for(i in nums){
 ## Section 7: Data Split
 
 ### Question 1
-**Using the data frame Orange:**  
-1. Using split function to break down the dataset on circumference and store it in 'split_data' variable.   
-2. Print the values for split_data where circumference is 30 and 75.  
-3. Find the average age of the tree when the circumference is 30 and when circumference is 214.  
 
+**Using the data frame Orange:**\
+1. Using split function to break down the dataset on circumference and store it in 'split_data' variable.\
+2. Print the values for split_data where circumference is 30 and 75.\
+3. Find the average age of the tree when the circumference is 30 and when circumference is 214.
 
-The dataset is loaded and the variable Orange contains the respective dataset.  
-
-
-```{r }
-library(datasets)
-```
-
-
-```{r }
-head(Orange)
-```
-
+The dataset is loaded and the variable Orange contains the respective dataset.
 
 ```{r }
 #### Start solution ####
 ```
 
-
 ```{r }
+split_data <- split(x = Orange,f = Orange$circumference)
 
+print(split_data$`30`)
+
+print(split_data$`75`)
 ```
 
-
 ```{r }
+data1 = split_data$`30`
 
+data2 = split_data$`214`
+
+lapply(list(data1$age, data2$age), mean)
 ```
-
-
-```{r }
-
-```
-
-
-```{r }
-
-```
-
-
-```{r }
-
-```
-
 
 ```{r }
 #### End solution ####
 ```
 
 ### Save it and push .Rmd and .html file to your Github Repository
+
 ## GOOD JOB! You have successfully finished the course!
